@@ -1,0 +1,42 @@
+class Solution {
+    private int[][] matrix; 
+    public void rotate(int[][] matrix) {
+        this.matrix = matrix; 
+
+        transpose(); 
+        reverseRows(); 
+    }
+
+    public void transpose(){
+        int n = matrix.length; 
+        for(int i=0; i<n; i++){
+            for(int j=0; j<n; j++){
+                if(i <j){
+                    swap(i,j); 
+                }
+            }
+        }
+    }
+
+    public void reverseRows(){
+        int n = matrix.length; 
+        for(int i=0; i<n; i++){
+            int left = 0; 
+            int right = n-1; 
+            while(left < right){
+                int temp = matrix[i][left]; 
+                matrix[i][left] = matrix[i][right]; 
+                matrix[i][right] = temp; 
+
+                left ++; 
+                right --; 
+            }
+        }
+    }
+    
+    public void swap(int i, int j){
+        int temp = matrix[i][j];
+        matrix[i][j] = matrix[j][i]; 
+        matrix[j][i] = temp; 
+    }
+}
