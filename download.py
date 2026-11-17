@@ -9,8 +9,8 @@ ACCEPTED_ONLY = False     # True = skip WA / TLE / etc.
 DELAY = 3.0               # base seconds between pages (jitter is added)
 MAX_RETRIES = 8
 # Optional manual fallback if browser_cookie3 can't read your browser:
-MANUAL_SESSION = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfYXV0aF91c2VyX2lkIjoiODg4NzI4NSIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwiX2F1dGhfdXNlcl9oYXNoIjoiNTQxNWEzOWY3MDIyYjhmMGM5ZWYwZjAzNzQ5YmQzZmExZTFhMzIyZjA5MWIzMzA1NWI0YmM1ZDVhMWNjOTkzOSIsInNlc3Npb25fdXVpZCI6ImYxMTYzNjQwIiwiaWQiOjg4ODcyODUsImVtYWlsIjoicmFqa3VtYXJ2Yi5jYXJlZXJAZ21haWwuY29tIiwidXNlcm5hbWUiOiJSYWprdW1hcjAwMyIsInVzZXJfc2x1ZyI6IlJhamt1bWFyMDAzIiwiYXZhdGFyIjoiaHR0cHM6Ly9hc3NldHMubGVldGNvZGUuY29tL3VzZXJzL1Jhamt1bWFyMDAzL2F2YXRhcl8xNzEzMTAwNDE3LnBuZyIsInJlZnJlc2hlZF9hdCI6MTc5Mjk0NzE4OCwiaXAiOiI0OS4yMDcuMjE1LjEwOCIsImlkZW50aXR5IjoiMDY5NzA4NDIwZDRhNDFjODEwMWNhOTU4YTUyOGZiMjYiLCJkZXZpY2Vfd2l0aF9pcCI6WyI2ZDk0YjFhMTc2MGIwZTg4MjRkMGYwYjlmMDYwOThmZiIsIjQ5LjIwNy4yMTUuMTA4Il0sIl9zZXNzaW9uX2V4cGlyeSI6MTIwOTYwMH0.CV8brNi08VAw6RXYqYpAF2y5Y6pHm8-lO0d2FP22rDw"       # LEETCODE_SESSION value
-MANUAL_CSRF = "3zZ1uy2YlVD327w2diYsSbVwZYO4Tha2"          # csrftoken value
+MANUAL_SESSION = ""       # LEETCODE_SESSION value
+MANUAL_CSRF = ""          # csrftoken value
 # ----------------------------
 
 EXT = {"python3": "py", "python": "py", "cpp": "cpp", "java": "java",
