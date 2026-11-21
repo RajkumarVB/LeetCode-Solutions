@@ -1,0 +1,332 @@
+{
+ "3sum": {
+  "p": "TP",
+  "d": "Find every unique triple of values in the array whose sum is zero. The same triple must not be reported twice.",
+  "ex": "[-1,0,1,2,-1,-4] -> [[-1,-1,2],[-1,0,1]]",
+  "c": "3 <= n <= 3000",
+  "i": "Sort, fix the first element, then solve two-sum on the rest with two pointers. Skip equal neighbours to avoid duplicate triples instead of using a Set.",
+  "k": [
+   [
+    "3sum_2025-03-04_1562884809_AC.java",
+    "Sort + fix one + two pointers, skip duplicates",
+    "O(n^2)",
+    "O(1) extra"
+   ],
+   [
+    "3sum_2024-01-22_1153372216_AC.java",
+    "Fix one + HashSet two-sum, dedupe sorted triples in a Set",
+    "O(n^2)",
+    "O(n)"
+   ]
+  ]
+ },
+ "4sum": {
+  "p": "TP",
+  "d": "Return all unique quadruples of values whose sum equals target.",
+  "ex": "nums=[1,0,-1,0,-2,2], target=0 -> [[-2,-1,1,2],[-2,0,0,2],[-1,0,0,1]]",
+  "c": "n <= 200, values up to 1e9 (sum can overflow int)",
+  "i": "Same idea as 3Sum with one more fixed loop: two nested loops + two pointers. Use long for the sum to avoid overflow.",
+  "k": [
+   [
+    "4sum_2023-12-28_1130722366_AC.java",
+    "Sort + two fixed indices + two pointers",
+    "O(n^3)",
+    "O(1) extra"
+   ],
+   [
+    "4sum_2023-12-28_1130729936_AC.java",
+    "Three loops + HashSet lookup for the fourth",
+    "O(n^3)",
+    "O(n)"
+   ]
+  ]
+ },
+ "add-two-numbers": {
+  "p": "LL",
+  "d": "Two linked lists hold the digits of two numbers in reverse order (ones digit first). Return their sum as a linked list in the same format.",
+  "ex": "2->4->3 + 5->6->4 -> 7->0->8 (342 + 465 = 807)",
+  "c": "1..100 nodes per list",
+  "i": "Walk both lists together with a carry, treating a finished list as 0. Loop while either list or carry remains; a dummy head simplifies building the result.",
+  "k": [
+   [
+    "AddTwoNumbers_2024-02-03_1164760680_AC.java",
+    "Single loop with carry and dummy head",
+    "O(max(m,n))",
+    "O(1) extra"
+   ]
+  ]
+ },
+ "alice-and-bob-playing-flower-game": {
+  "p": "MG",
+  "d": "Alice picks x in [1,n] flowers for one lane and y in [1,m] for the other; players alternately remove one flower and whoever takes the last one wins. Count pairs (x,y) where Alice (who moves first) wins.",
+  "ex": "n=3, m=2 -> 3",
+  "c": "1 <= n, m <= 1e5",
+  "i": "Alice wins exactly when x + y is odd, i.e. one is odd and the other even. Answer = odd(n)*even(m) + even(n)*odd(m) = (n*m)/2.",
+  "k": [
+   [
+    "AliceAndBobPlayingFlowerGame_2025-08-29_1752683514_AC.java",
+    "Parity counting per x",
+    "O(n)",
+    "O(1)"
+   ]
+  ]
+ },
+ "all-nodes-distance-k-in-binary-tree": {
+  "p": "TR",
+  "d": "Given a binary tree, a target node and k, return the values of all nodes exactly k edges away from the target.",
+  "ex": "root=[3,5,1,6,2,0,8,null,null,7,4], target=5, k=2 -> [7,4,1]",
+  "c": "<= 500 nodes, unique values",
+  "i": "A tree is just an undirected graph once you can go upward: record each node's parent, then BFS from the target for k levels with a visited set.",
+  "k": [
+   [
+    "AllNodesDistanceKInBinaryTree_2026-01-02_1871584984_AC.java",
+    "Parent map + level BFS from target",
+    "O(n)",
+    "O(n)"
+   ]
+  ]
+ },
+ "amount-of-time-for-binary-tree-to-be-infected": {
+  "p": "TR",
+  "d": "An infection starts at the node with value start and spreads to adjacent nodes (children and parent) each minute. Return the minutes until the whole tree is infected.",
+  "ex": "root=[1,5,3,null,4,10,6,9,2], start=3 -> 4",
+  "c": "up to 1e5 nodes, unique values",
+  "i": "Same trick as 'distance K': build parent pointers, BFS from start; the answer is the number of BFS levels minus one.",
+  "k": [
+   [
+    "AmountOfTimeForBinaryTreeToBeInfected_2026-01-23_1894082129_AC.java",
+    "Parent map + level BFS (count levels)",
+    "O(n)",
+    "O(n)"
+   ]
+  ]
+ },
+ "article-views-i": {
+  "p": "SQL",
+  "d": "From a Views table (article_id, author_id, viewer_id, view_date), list the authors who viewed at least one of their own articles, sorted by id.",
+  "ex": "rows where author_id = viewer_id -> those author ids",
+  "c": "table may contain duplicates",
+  "i": "Filter author_id = viewer_id, use DISTINCT to remove duplicates, alias the column and ORDER BY.",
+  "k": [
+   [
+    "article-views-i_2023-12-15_1120166524_AC.sql",
+    "WHERE + DISTINCT",
+    "-",
+    "-"
+   ]
+  ]
+ },
+ "average-time-of-process-per-machine": {
+  "p": "SQL",
+  "d": "Each process on a machine has a 'start' and 'end' timestamp row. Report each machine's average processing time (end - start), rounded to 3 decimals.",
+  "ex": "machine 0: processes taking 0.894 and 1.112 -> 1.003",
+  "c": "(machine_id, process_id, activity_type) is unique",
+  "i": "Self-join the table: one alias for 'start' rows and one for 'end' rows on the same machine+process, then GROUP BY machine and AVG the difference.",
+  "k": [
+   [
+    "average-time-of-process-per-machine_2023-12-16_1120782309_AC.sql",
+    "Self-join start/end rows + AVG",
+    "-",
+    "-"
+   ]
+  ]
+ },
+ "balanced-binary-tree": {
+  "p": "TR",
+  "d": "Decide whether a binary tree is height-balanced: at every node the heights of the left and right subtrees differ by at most 1.",
+  "ex": "[3,9,20,null,null,15,7] -> true; [1,2,2,3,3,null,null,4,4] -> false",
+  "c": "0..5000 nodes",
+  "i": "Compute heights bottom-up (post-order) and check the balance condition in the same pass, so it runs in O(n) instead of O(n^2).",
+  "k": [
+   [
+    "BalancedBinaryTree_2026-01-18_1888830369_AC.java",
+    "Post-order height with a global flag",
+    "O(n)",
+    "O(h)"
+   ],
+   [
+    "BalancedBinaryTree_2024-02-04_1166038476_AC.java",
+    "Post-order returning (height, isBalanced) record",
+    "O(n)",
+    "O(h)"
+   ]
+  ]
+ },
+ "best-time-to-buy-and-sell-stock": {
+  "p": "SW",
+  "d": "Given daily prices, choose one day to buy and a later day to sell to maximise profit. Return 0 if no profit is possible.",
+  "ex": "[7,1,5,3,6,4] -> 5 (buy at 1, sell at 6)",
+  "c": "1 <= n <= 1e5",
+  "i": "Scan once, tracking the minimum price seen so far; the best profit when selling today is price - minSoFar.",
+  "k": [
+   [
+    "BestTimeToBuyAndSellStock_2025-09-13_1769684631_AC.java",
+    "Single pass with running minimum",
+    "O(n)",
+    "O(1)"
+   ]
+  ]
+ },
+ "best-time-to-buy-and-sell-stock-ii": {
+  "p": "GD",
+  "d": "Same prices array, but you may buy and sell as many times as you like (holding at most one share). Return the maximum profit.",
+  "ex": "[7,1,5,3,6,4] -> 7 (1->5 and 3->6)",
+  "c": "1 <= n <= 3e4",
+  "i": "Greedy: every upward step prices[i+1] > prices[i] can be captured, so sum all positive day-to-day differences.",
+  "k": [
+   [
+    "BestTimeToBuyAndSellStockIi_2024-01-03_1135501891_AC.java",
+    "Sum of positive differences",
+    "O(n)",
+    "O(1)"
+   ]
+  ]
+ },
+ "big-countries": {
+  "p": "SQL",
+  "d": "A country is big if its area is at least 3,000,000 km^2 or its population is at least 25,000,000. Return name, population and area of big countries.",
+  "ex": "Afghanistan: area 652,230 km^2, population 25,500,100 -> big (by population)",
+  "c": "-",
+  "i": "Simple WHERE with OR. (A UNION of two queries can be faster on indexed columns.)",
+  "k": [
+   [
+    "big-countries_2023-12-15_1120162121_AC.sql",
+    "WHERE area OR population",
+    "-",
+    "-"
+   ]
+  ]
+ },
+ "binary-search": {
+  "p": "BS",
+  "d": "Search a sorted array of distinct integers for target and return its index, or -1. Must be O(log n).",
+  "ex": "nums=[-1,0,3,5,9,12], target=9 -> 4",
+  "c": "n <= 1e4, sorted, unique",
+  "i": "Classic template: while (lo <= hi), mid = lo + (hi - lo) / 2 avoids overflow; move lo or hi past mid.",
+  "k": [
+   [
+    "BinarySearch_2025-09-20_1776782741_AC.java",
+    "Iterative binary search",
+    "O(log n)",
+    "O(1)"
+   ],
+   [
+    "BinarySearch_2023-10-24_1082976045_AC.java",
+    "Recursive binary search",
+    "O(log n)",
+    "O(log n) stack"
+   ]
+  ]
+ },
+ "binary-tree-inorder-traversal": {
+  "p": "TR",
+  "d": "Return the inorder (left, node, right) traversal of a binary tree.",
+  "ex": "[1,null,2,3] -> [1,3,2]",
+  "c": "0..100 nodes",
+  "i": "Iterative version: push all left children onto a stack, pop one, visit it, then move to its right child.",
+  "k": [
+   [
+    "BinaryTreeInorderTraversal_2023-10-19_1078864385_AC.java",
+    "Iterative with explicit stack",
+    "O(n)",
+    "O(h)"
+   ]
+  ]
+ },
+ "binary-tree-level-order-traversal": {
+  "p": "TR",
+  "d": "Return the values of a binary tree level by level, left to right, as a list of lists.",
+  "ex": "[3,9,20,null,null,15,7] -> [[3],[9,20],[15,7]]",
+  "c": "0..2000 nodes",
+  "i": "BFS with a queue; read q.size() at the start of each level so you know how many nodes belong to it.",
+  "k": [
+   [
+    "BinaryTreeLevelOrderTraversal_2026-01-18_1889050441_AC.java",
+    "BFS, process one level per iteration",
+    "O(n)",
+    "O(n)"
+   ]
+  ]
+ },
+ "binary-tree-maximum-path-sum": {
+  "p": "TR",
+  "d": "A path is any sequence of connected nodes (each used at most once, not necessarily through the root). Return the largest possible path sum.",
+  "ex": "[-10,9,20,null,null,15,7] -> 42 (15 + 20 + 7)",
+  "c": "1..3e4 nodes, values in [-1000, 1000]",
+  "i": "DFS returns the best downward path starting at a node (node + max(0, left, right)); at each node update the global answer with node + max(0,left) + max(0,right), the path that bends there.",
+  "k": [
+   [
+    "BinaryTreeMaximumPathSum_2026-01-19_1890052014_AC.java",
+    "Post-order DFS with global max, clamp negatives to 0",
+    "O(n)",
+    "O(h)"
+   ]
+  ]
+ },
+ "binary-tree-postorder-traversal": {
+  "p": "TR",
+  "d": "Return the postorder (left, right, node) traversal of a binary tree.",
+  "ex": "[1,null,2,3] -> [3,2,1]",
+  "c": "0..100 nodes",
+  "i": "Recursive DFS: visit children first, then the node. Iterative trick: do a modified preorder (node, right, left) and reverse it.",
+  "k": [
+   [
+    "BinaryTreePostorderTraversal_2023-10-18_1078053489_AC.java",
+    "Recursive DFS",
+    "O(n)",
+    "O(h)"
+   ]
+  ]
+ },
+ "binary-tree-preorder-traversal": {
+  "p": "TR",
+  "d": "Return the preorder (node, left, right) traversal of a binary tree.",
+  "ex": "[1,null,2,3] -> [1,2,3]",
+  "c": "0..100 nodes",
+  "i": "Iteratively: pop from a stack, visit, push right child then left child (so left is processed first).",
+  "k": [
+   [
+    "BinaryTreePreorderTraversal_2023-10-19_1078843062_AC.java",
+    "Iterative with stack (push right, then left)",
+    "O(n)",
+    "O(h)"
+   ],
+   [
+    "BinaryTreePreorderTraversal_2023-10-18_1078029326_AC.java",
+    "Recursive DFS",
+    "O(n)",
+    "O(h)"
+   ]
+  ]
+ },
+ "binary-tree-right-side-view": {
+  "p": "TR",
+  "d": "Looking at a binary tree from the right side, return the values you can see from top to bottom (the last node of each level).",
+  "ex": "[1,2,3,null,5,null,4] -> [1,3,4]",
+  "c": "0..100 nodes",
+  "i": "Level-order BFS and record the last node of each level. (DFS visiting right first and recording the first node at each new depth also works.)",
+  "k": [
+   [
+    "BinaryTreeRightSideView_2026-01-18_1889052055_AC.java",
+    "BFS, take last node per level",
+    "O(n)",
+    "O(n)"
+   ]
+  ]
+ },
+ "binary-tree-zigzag-level-order-traversal": {
+  "p": "TR",
+  "d": "Level-order traversal, but alternate direction each level: left-to-right, then right-to-left, and so on.",
+  "ex": "[3,9,20,null,null,15,7] -> [[3],[20,9],[15,7]]",
+  "c": "0..2000 nodes",
+  "i": "Normal BFS; on odd levels insert each value at the front of the level list (or reverse the list) instead of changing the traversal order.",
+  "k": [
+   [
+    "BinaryTreeZigzagLevelOrderTraversal_2024-01-02_1134000706_AC.java",
+    "BFS + add-to-front on alternate levels",
+    "O(n)",
+    "O(n)"
+   ]
+  ]
+ }
+}
