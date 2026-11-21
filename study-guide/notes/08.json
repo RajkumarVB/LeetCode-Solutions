@@ -1,0 +1,349 @@
+{
+ "pascals-triangle": {
+  "p": "DP1",
+  "d": "Return the first numRows rows of Pascal's triangle.",
+  "ex": "5 -> [[1],[1,1],[1,2,1],[1,3,3,1],[1,4,6,4,1]]",
+  "c": "numRows <= 30",
+  "i": "Each inner entry is the sum of the two above it: row[j] = prev[j-1] + prev[j]. Alternatively build each row directly with C(r, j) = C(r, j-1) * (r - j) / j.",
+  "k": [
+   [
+    "PascalsTriangle_2023-12-27_1129435570_AC.java",
+    "Each row from the binomial-coefficient formula",
+    "O(numRows^2)",
+    "O(1) extra"
+   ]
+  ]
+ },
+ "path-crossing": {
+  "p": "AH",
+  "d": "Walk a path of N/S/E/W unit moves from the origin. Return true if you ever revisit a point.",
+  "ex": "\"NESWW\" -> true",
+  "c": "n <= 1e4",
+  "i": "Track visited coordinates in a HashSet. The key must be value-based: a record, a \"x,y\" string, or a class overriding equals/hashCode.",
+  "k": [
+   [
+    "PathCrossing_2023-12-23_1126412307_AC.java",
+    "HashSet of (x, y) pairs",
+    "O(n)",
+    "O(n)"
+   ]
+  ]
+ },
+ "permutation-in-string": {
+  "p": "SW",
+  "d": "Does s2 contain some permutation of s1 as a substring?",
+  "ex": "s1=\"ab\", s2=\"eidbaooo\" -> true",
+  "c": "lengths <= 1e4",
+  "i": "Fixed-size sliding window of length |s1| with 26-letter counts. Track 'matches' (how many of the 26 counts are equal) so each slide is O(1); found when matches == 26.",
+  "k": [
+   [
+    "PermutationInString_2025-09-15_1771908370_AC.java",
+    "Fixed window + matches counter",
+    "O(n + m)",
+    "O(1)"
+   ],
+   [
+    "PermutationInString_2025-09-15_1771915840_AC.java",
+    "Fixed window, compare 26 counts each slide",
+    "O(26 m)",
+    "O(1)"
+   ],
+   [
+    "PermutationInString_2024-01-23_1154429661_AC.java",
+    "Brute force: check every substring",
+    "O(n * m)",
+    "O(1)"
+   ]
+  ]
+ },
+ "permutations": {
+  "p": "BT",
+  "d": "Return all permutations of distinct integers.",
+  "ex": "[1,2,3] -> 6 permutations",
+  "c": "n <= 6",
+  "i": "Backtracking: at each level pick any unused number (a boolean[] or set of used values), recurse, then un-pick it. Alternative: swap nums[i] into position start.",
+  "k": [
+   [
+    "Permutations_2024-03-15_1204575889_AC.java",
+    "Backtracking with LinkedHashSet of used values",
+    "O(n * n!)",
+    "O(n)"
+   ]
+  ]
+ },
+ "plus-one": {
+  "p": "MG",
+  "d": "Add one to a big integer stored as an array of digits.",
+  "ex": "[1,2,9] -> [1,3,0]; [9,9] -> [1,0,0]",
+  "c": "length <= 100",
+  "i": "From the right: if a digit is < 9, increment it and return. Otherwise set it to 0 and continue. If every digit was 9, return a new array [1, 0, ..., 0].",
+  "k": [
+   [
+    "PlusOne_2023-12-23_1126389003_AC.java",
+    "In-place from the right, early return",
+    "O(n)",
+    "O(1) usually"
+   ],
+   [
+    "PlusOne_2023-12-23_1126382781_AC.java",
+    "General carry propagation into a deque",
+    "O(n)",
+    "O(n)"
+   ]
+  ]
+ },
+ "populating-next-right-pointers-in-each-node": {
+  "p": "TR",
+  "d": "In a perfect binary tree, set every node's next pointer to the node on its right in the same level (null at the end of a level).",
+  "ex": "[1,2,3,4,5,6,7] -> 1->#, 2->3->#, 4->5->6->7->#",
+  "c": "<= 4095 nodes",
+  "i": "BFS by levels works with O(n) space. O(1) space: use the next pointers already set on the level above: left.next = right, and right.next = node.next.left.",
+  "k": [
+   [
+    "PopulatingNextRightPointersInEachNode_2024-01-03_1135485345_AC.java",
+    "Recursive, uses parent's next pointer",
+    "O(n)",
+    "O(h)"
+   ],
+   [
+    "PopulatingNextRightPointersInEachNode_2024-01-03_1135487593_AC.java",
+    "Level-order BFS",
+    "O(n)",
+    "O(n)"
+   ]
+  ]
+ },
+ "power-of-three": {
+  "p": "MG",
+  "d": "Return whether n is a power of three.",
+  "ex": "27 -> true; 45 -> false",
+  "c": "32-bit int",
+  "i": "Divide by 3 while divisible and check whether you reach 1. No-loop trick: 3^19 (1162261467) is the largest power of 3 in an int, so n > 0 && 1162261467 % n == 0.",
+  "k": [
+   [
+    "PowerOfThree_2023-12-27_1129143187_AC.java",
+    "Repeated division",
+    "O(log n)",
+    "O(1)"
+   ]
+  ]
+ },
+ "product-of-array-except-self": {
+  "p": "AH",
+  "d": "Return an array where each position holds the product of all other elements, in O(n) without division.",
+  "ex": "[1,2,3,4] -> [24,12,8,6]",
+  "c": "n <= 1e5",
+  "i": "answer[i] = (product of everything left of i) * (product of everything right of i). Fill prefix products into the output, then multiply in a running suffix product from the right: O(1) extra space.",
+  "k": [
+   [
+    "ProductOfArrayExceptSelf_2024-01-06_1138477141_AC.java",
+    "Prefix into output + running suffix",
+    "O(n)",
+    "O(1) extra"
+   ],
+   [
+    "ProductOfArrayExceptSelf_2024-01-06_1138421864_AC.java",
+    "Separate prefix and suffix arrays",
+    "O(n)",
+    "O(n)"
+   ]
+  ]
+ },
+ "product-sales-analysis-i": {
+  "p": "SQL",
+  "d": "For each sale, report the product name, year and price.",
+  "ex": "join Sales with Product on product_id",
+  "c": "-",
+  "i": "INNER JOIN Sales and Product on product_id, then select the needed columns.",
+  "k": [
+   [
+    "product-sales-analysis-i_2023-12-15_1120276738_AC.sql",
+    "INNER JOIN",
+    "-",
+    "-"
+   ]
+  ]
+ },
+ "rearrange-array-elements-by-sign": {
+  "p": "TP",
+  "d": "An array has equally many positives and negatives. Rearrange it to alternate positive, negative, ..., starting with a positive, keeping relative order within each sign.",
+  "ex": "[3,1,-2,-5,2,-4] -> [3,-2,1,-5,2,-4]",
+  "c": "n <= 2e5",
+  "i": "Two write pointers into a new array: positives go to even indices (0, 2, ...), negatives to odd (1, 3, ...).",
+  "k": [
+   [
+    "RearrangeArrayElementsBySign_2025-01-08_1502132749_AC.java",
+    "Even/odd write pointers",
+    "O(n)",
+    "O(n)"
+   ],
+   [
+    "RearrangeArrayElementsBySign_2023-08-24_1030227349_AC.java",
+    "Split into two lists, then interleave",
+    "O(n)",
+    "O(n)"
+   ]
+  ]
+ },
+ "recyclable-and-low-fat-products": {
+  "p": "SQL",
+  "d": "Return ids of products that are both low fat and recyclable.",
+  "ex": "low_fats='Y' and recyclable='Y'",
+  "c": "-",
+  "i": "Simple WHERE with AND.",
+  "k": [
+   [
+    "recyclable-and-low-fat-products_2023-12-15_1120157418_AC.sql",
+    "WHERE ... AND ...",
+    "-",
+    "-"
+   ]
+  ]
+ },
+ "redundant-connection": {
+  "p": "AG",
+  "d": "A tree with one extra edge added is given as an edge list. Return the edge whose removal restores a tree (the last such edge in the input).",
+  "ex": "[[1,2],[1,3],[2,3]] -> [2,3]",
+  "c": "n <= 1000",
+  "i": "Union-find: process edges in order. The first edge whose endpoints already share a root closes a cycle, so it's the redundant one.",
+  "k": [
+   [
+    "RedundantConnection_2026-01-23_1894129889_AC.java",
+    "Union-find (union by size + path compression)",
+    "O(n * alpha(n))",
+    "O(n)"
+   ]
+  ]
+ },
+ "remove-duplicates-from-sorted-array": {
+  "p": "TP",
+  "d": "Remove duplicates in place from a sorted array; return the count k of unique values, which must occupy the first k slots.",
+  "ex": "[0,0,1,1,1,2,2,3,3,4] -> 5, [0,1,2,3,4,...]",
+  "c": "n <= 3e4",
+  "i": "Slow pointer i marks the last unique value; fast pointer j scans. When nums[j] != nums[i], write it to ++i.",
+  "k": [
+   [
+    "RemoveDuplicatesFromSortedArray_2023-12-23_1126355857_AC.java",
+    "Slow/fast pointers",
+    "O(n)",
+    "O(1)"
+   ]
+  ]
+ },
+ "remove-element": {
+  "p": "TP",
+  "d": "Remove every occurrence of val in place and return how many elements remain; they must occupy the first k slots (any order).",
+  "ex": "nums=[3,2,2,3], val=3 -> 2, [2,2,...]",
+  "c": "n <= 100",
+  "i": "Write pointer k: for each element != val, copy it to nums[k++]. Return k.",
+  "k": []
+ },
+ "remove-nth-node-from-end-of-list": {
+  "p": "LL",
+  "d": "Remove the nth node from the end of a linked list.",
+  "ex": "1->2->3->4->5, n=2 -> 1->2->3->5",
+  "c": "<= 30 nodes",
+  "i": "One pass: move a fast pointer n steps ahead, then move fast and slow together until fast reaches the last node; slow is just before the target. A dummy head handles removing the first node cleanly.",
+  "k": [
+   [
+    "RemoveNthNodeFromEndOfList_2025-09-26_1782944865_AC.java",
+    "Two pointers n apart (one pass)",
+    "O(L)",
+    "O(1)"
+   ],
+   [
+    "RemoveNthNodeFromEndOfList_2024-02-03_1164429002_AC.java",
+    "Count length, then walk to L - n",
+    "O(L)",
+    "O(1)"
+   ]
+  ]
+ },
+ "reorder-list": {
+  "p": "LL",
+  "d": "Reorder L0 -> L1 -> ... -> Ln into L0 -> Ln -> L1 -> Ln-1 -> ... in place.",
+  "ex": "1->2->3->4->5 -> 1->5->2->4->3",
+  "c": "<= 5e4 nodes",
+  "i": "Three classic steps: find the middle (slow/fast), reverse the second half, then merge the two halves alternately.",
+  "k": [
+   [
+    "ReorderList_2025-09-25_1782494823_AC.java",
+    "Middle + reverse second half + interleave",
+    "O(n)",
+    "O(1)"
+   ],
+   [
+    "ReorderList_2025-09-25_1782468518_AC.java",
+    "Nodes in an array + two pointers",
+    "O(n)",
+    "O(n)"
+   ]
+  ]
+ },
+ "replace-employee-id-with-the-unique-identifier": {
+  "p": "SQL",
+  "d": "Show each employee's unique_id (NULL if missing) and name.",
+  "ex": "Alice has no unique id -> (NULL, Alice)",
+  "c": "-",
+  "i": "LEFT JOIN keeps every employee even when there's no matching EmployeeUNI row.",
+  "k": [
+   [
+    "replace-employee-id-with-the-unique-identifier_2023-12-15_1120275006_AC.sql",
+    "LEFT JOIN",
+    "-",
+    "-"
+   ]
+  ]
+ },
+ "reverse-bits": {
+  "p": "BIT",
+  "d": "Reverse the bits of a 32-bit integer.",
+  "ex": "00000010100101000001111010011100 -> 00111001011110000010100101000000",
+  "c": "32 bits",
+  "i": "32 times: result = (result << 1) | (n & 1); n >>>= 1. Use the unsigned shift >>> in Java.",
+  "k": [
+   [
+    "ReverseBits_2023-12-27_1129518645_AC.java",
+    "Shift result left, take n's lowest bit",
+    "O(32)",
+    "O(1)"
+   ]
+  ]
+ },
+ "reverse-integer": {
+  "p": "MG",
+  "d": "Reverse the digits of a 32-bit signed integer; return 0 if the result overflows (64-bit integers aren't allowed).",
+  "ex": "-123 -> -321; 1534236469 -> 0",
+  "c": "32-bit int",
+  "i": "Pop digits with % 10 and push with result*10 + digit. Before pushing, check result against MAX/10 and MIN/10 to detect overflow without using long.",
+  "k": [
+   [
+    "ReverseInteger_2023-12-30_1132112207_AC.java",
+    "Digit pop/push with pre-overflow check",
+    "O(log x)",
+    "O(1)"
+   ],
+   [
+    "ReverseInteger_2023-02-27_905829116_AC.java",
+    "Use long and check the range (breaks the no-64-bit rule)",
+    "O(log x)",
+    "O(1)"
+   ]
+  ]
+ },
+ "reverse-linked-list": {
+  "p": "LL",
+  "d": "Reverse a singly linked list.",
+  "ex": "1->2->3->4->5 -> 5->4->3->2->1",
+  "c": "<= 5000 nodes",
+  "i": "Iterative three-pointer pattern: save next, point curr.next to prev, advance prev and curr. Recursive: reverse the rest, then head.next.next = head; head.next = null.",
+  "k": [
+   [
+    "ReverseLinkedList_2023-10-17_1077196635_AC.java",
+    "Iterative prev/curr/next",
+    "O(n)",
+    "O(1)"
+   ]
+  ]
+ }
+}
